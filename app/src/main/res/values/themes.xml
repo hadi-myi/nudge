@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/nudge_white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/hopefullythisworks</item>
+        <item name="postSplashScreenTheme">@style/Theme.Nudge</item>
+    </style>
+    <style name="Theme.Nudge" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
