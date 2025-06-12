@@ -2,6 +2,7 @@ package com.example.nudge
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -10,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -24,6 +26,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -76,18 +79,37 @@ fun LoginScreen() {
 
         Spacer(modifier = Modifier.height(48.dp))
 
+
         // Centered Fields and Buttons
         Column(
             modifier = Modifier
                 .widthIn(max = 300.dp)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
+        ) {Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 4.dp)
         ) {
+            Text(
+                text = "Login",
+                fontSize = 24.sp,
+                fontFamily = GeorgeRounded,
+                color = colorResource(id = R.color.nudge_blue),
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email Address") },
-                modifier = Modifier.fillMaxWidth()
+                label = { Text("Email", fontFamily = GeorgeRounded) },
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedContainerColor = colorResource(id = R.color.nudge_white),
+                    focusedContainerColor = colorResource(id = R.color.nudge_white)
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -95,9 +117,25 @@ fun LoginScreen() {
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth()
+                label = { Text("Password", fontFamily = GeorgeRounded) },
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedContainerColor = colorResource(id = R.color.nudge_white),
+                    focusedContainerColor = colorResource(id = R.color.nudge_white)
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
             )
+            Text(
+                text = "Forgot Password?",
+                color = colorResource(id = R.color.nudge_blue),
+                fontFamily = GeorgeRounded,
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(top = 8.dp, bottom = 16.dp)
+            )
+
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -107,7 +145,7 @@ fun LoginScreen() {
                 shape = RectangleShape,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Login", color = colorResource(id = android.R.color.white), fontFamily = GeorgeRounded)
+                Text(text = "Login", color = colorResource(id = R.color.nudge_white), fontFamily = GeorgeRounded)
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -118,9 +156,40 @@ fun LoginScreen() {
                 shape = RectangleShape,
                 border = BorderStroke(2.dp, colorResource(id = R.color.nudge_blue)),
                 modifier = Modifier.fillMaxWidth()
+                    .clickable{
+                        /* TODO: Handle login */
+                    }
             ) {
                 Text(text = "Skip Login", fontFamily = GeorgeRounded)
             }
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // New "Create Account" button
+            OutlinedButton(
+                onClick = { /* TODO: Handle create account */ },
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = colorResource(id = R.color.nudge_blue)),
+                shape = RectangleShape,
+                border = BorderStroke(2.dp, colorResource(id = R.color.nudge_blue)),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Create Account", fontFamily = GeorgeRounded)
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+                    .clickable { /* TODO: Handle Google login */ },
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.google_sign),
+                    contentDescription = "Sign in with Google",
+                    modifier = Modifier
+                        .height(48.dp)
+                        .fillMaxWidth()
+                )
+            }
+
 
 
         }
