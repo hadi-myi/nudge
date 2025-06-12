@@ -23,31 +23,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NudgeTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Greeting(
-                        name = "Android"
-                    )}
-                }
+                LoginScreen()
             }
         }
     }
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NudgeTheme {
-        Greeting("Android")
-    }
-}
+
