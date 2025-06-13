@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             NudgeTheme {
-                LoginScreen()
+                NavGraph()
             }
         }
     }

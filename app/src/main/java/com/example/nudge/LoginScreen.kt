@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -21,7 +19,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
@@ -45,12 +42,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.navigation.NavController
 
 // Custom font variable
 val GeorgeRounded = FontFamily(Font(R.font.georgerounded))
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Box(
@@ -184,7 +182,7 @@ fun LoginScreen() {
                     modifier = Modifier
                         .align(Alignment.End)
                         .padding(top = 8.dp, bottom = 16.dp)
-                        .clickable{/* TODO: Handle Forgot Password */}
+                        .clickable{navController.navigate("home")}
                 )
 
 
@@ -192,7 +190,7 @@ fun LoginScreen() {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Button(
-                    onClick = { /* TODO: Handle login */ },
+                    onClick = { navController.navigate("home")},
                     colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.nudge_blue)),
                     shape = RectangleShape,
                     modifier = Modifier.fillMaxWidth()
@@ -203,14 +201,11 @@ fun LoginScreen() {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 OutlinedButton(
-                    onClick = { /* TODO: Handle skip */ },
+                    onClick = {navController.navigate("home") },
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = colorResource(id = R.color.nudge_blue)),
                     shape = RectangleShape,
                     border = BorderStroke(2.dp, colorResource(id = R.color.nudge_blue)),
                     modifier = Modifier.fillMaxWidth()
-                        .clickable{
-                            /* TODO: Handle login */
-                        }
                 ) {
                     Text(text = "Skip Login", fontFamily = GeorgeRounded)
                 }
@@ -218,7 +213,7 @@ fun LoginScreen() {
 
                 // New "Create Account" button
                 OutlinedButton(
-                    onClick = { /* TODO: Handle create account */ },
+                    onClick = {navController.navigate("home")},
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = colorResource(id = R.color.nudge_blue)),
                     shape = RectangleShape,
                     border = BorderStroke(2.dp, colorResource(id = R.color.nudge_blue)),
@@ -230,7 +225,7 @@ fun LoginScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp)
-                        .clickable { /* TODO: Handle Google login */ },
+                        .clickable {navController.navigate("home")},
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
