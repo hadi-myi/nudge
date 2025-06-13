@@ -22,8 +22,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -38,6 +40,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 
 // Custom font variable
 val GeorgeRounded = FontFamily(Font(R.font.georgerounded))
@@ -102,8 +108,21 @@ fun LoginScreen() {
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email", fontFamily = GeorgeRounded) },
+                label = {
+                    Text("Email", fontFamily = GeorgeRounded, color = colorResource(id = R.color.nudge_blue))
+                },
+                textStyle = androidx.compose.ui.text.TextStyle(
+                    color = colorResource(id = R.color.black), // Or another dark color you prefer
+                    fontFamily = GeorgeRounded
+                ),
                 colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = colorResource(id = R.color.nudge_blue),
+                    focusedBorderColor = colorResource(id = R.color.nudge_blue),
+                    unfocusedLabelColor = colorResource(id = R.color.nudge_blue),
+                    focusedLabelColor = colorResource(id = R.color.nudge_blue),
+                    cursorColor = colorResource(id = R.color.nudge_blue),
+                    unfocusedTextColor = colorResource(id = R.color.black),
+                    focusedTextColor = colorResource(id = R.color.black),
                     unfocusedContainerColor = colorResource(id = R.color.nudge_white),
                     focusedContainerColor = colorResource(id = R.color.nudge_white)
                 ),
@@ -114,11 +133,37 @@ fun LoginScreen() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            var passwordVisible by remember { mutableStateOf(false) }
+
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password", fontFamily = GeorgeRounded) },
+                label = {
+                    Text("Password", fontFamily = GeorgeRounded, color = colorResource(id = R.color.nudge_blue))
+                },
+                textStyle = androidx.compose.ui.text.TextStyle(
+                    color = colorResource(id = R.color.black),
+                    fontFamily = GeorgeRounded
+                ),
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                trailingIcon = {
+                    val icon = if (passwordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility
+                    val description = if (passwordVisible) "Hide password" else "Show password"
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = description,
+                        modifier = Modifier.clickable { passwordVisible = !passwordVisible },
+                        tint = colorResource(id = R.color.nudge_blue)
+                    )
+                },
                 colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = colorResource(id = R.color.nudge_blue),
+                    focusedBorderColor = colorResource(id = R.color.nudge_blue),
+                    unfocusedLabelColor = colorResource(id = R.color.nudge_blue),
+                    focusedLabelColor = colorResource(id = R.color.nudge_blue),
+                    cursorColor = colorResource(id = R.color.nudge_blue),
+                    unfocusedTextColor = colorResource(id = R.color.black),
+                    focusedTextColor = colorResource(id = R.color.black),
                     unfocusedContainerColor = colorResource(id = R.color.nudge_white),
                     focusedContainerColor = colorResource(id = R.color.nudge_white)
                 ),
@@ -126,15 +171,7 @@ fun LoginScreen() {
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
             )
-            Text(
-                text = "Forgot Password?",
-                color = colorResource(id = R.color.nudge_blue),
-                fontFamily = GeorgeRounded,
-                fontSize = 14.sp,
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(top = 8.dp, bottom = 16.dp)
-            )
+
 
 
             Spacer(modifier = Modifier.height(24.dp))
